@@ -31,7 +31,7 @@ Notes: on CLI publish .pdb file can be removed.
 
 ## SyncFusion license
 
-SyncFusion is prioprietary software, so you need to have a license to use it ([there is also a community version](https://www.syncfusion.com/products/communitylicense))
+SyncFusion is prioprietary software, so you need to have a license to use it ([there is also a community version available](https://www.syncfusion.com/products/communitylicense))
 
 ## Nuget Dependencies
 
