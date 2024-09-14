@@ -12,6 +12,8 @@ namespace CLI
     {
         static void Main(string[] args)
         {
+            // Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Your License Key");
+
             if (args.Length != 2)
             {
                 WriteError("InvalidArgLength", "Usage: cli.exe <input_path> <output_pdf_path>");

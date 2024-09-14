@@ -71,6 +71,12 @@ end;
 
 SyncFusion is prioprietary software, so you need to have a license to use it ([there is also a community version available](https://www.syncfusion.com/products/communitylicense))
 
+In order to set your license, you need uncomment the following line in **CLI/CLI/Program.cs** and replace the license key with yours:
+
+```csharp
+// Syncfusion.Licensing.SyncfusionLicenseProvider RegisterLicense("Your License Key");
+```
+
 ## Nuget Dependencies
 
 - [Syncfusion.DocIORenderer.Net.Core](https://www.nuget.org/packages/Syncfusion.DocIORenderer.Net.Core)
