@@ -2,11 +2,13 @@
 
 ## Overview
 
-CLI/* contains source code for .NET 5 (default target to make it [work on win7](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0-supported-os.md), there is also .net 8 [sync fusion example](https://github.com/SyncfusionExamples/DocIO-Examples/blob/main/Word-to-PDF-Conversion/Convert-Word-document-to-PDF/.NET/Convert-Word-document-to-PDF/Convert-Word-document-to-PDF.csproj)) CLI.
+**CLI/*** contains source code for .NET 5 CLI (default target to make it [work on win7](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0-supported-os.md), there is also .net 8 [sync fusion example](https://github.com/SyncfusionExamples/DocIO-Examples/blob/main/Word-to-PDF-Conversion/Convert-Word-document-to-PDF/.NET/Convert-Word-document-to-PDF/Convert-Word-document-to-PDF.csproj)).
 
-Delphi/* contains source code for delphi wrapper parsing the CLI output, along with error handling, so you can easily integrate it into your delphi application, by checking error types below.
+**Delphi/*** contains source code for delphi wrapper parsing the CLI output, along with error handling, so you can easily integrate it into your delphi application, by checking error types below.
 
-Delphi/IPC.pas contains ExecAndCapture function, which is used to execute CLI and capture its output via anonymous pipe. It is slightly modified version of [this code](https://github.com/ThomasJaeger/VisualMASM/blob/b809d4efa0202523333f29fb3a84122fea410b22/Domain/uSharedGlobals.pas#L232) in order to support utf8 strings by casting cli output to PAnsiChar and then to UTF8String. It is important to note that AnsiStrings page code is based on the system code page (windows settings) so beware of that if your CLI output is using non-english characters. Also, pipe buffer size has it's own limits, default buffer size set in function is 4096 bytes, but you can change it to your needs (maximum safe limit is considered to be 64 kB).
+**Delphi/RtfToPdf.pas** contains ExecRtfToPdf function, which is used to convert RTF to PDF. It accepts two arguments, input file path and output file path.
+
+**Delphi/IPC.pas** contains ExecAndCapture function, which is internally used to execute CLI and capture its output via anonymous pipe. It is slightly modified version of [this code](https://github.com/ThomasJaeger/VisualMASM/blob/b809d4efa0202523333f29fb3a84122fea410b22/Domain/uSharedGlobals.pas#L232) in order to support utf8 strings by casting cli output to PAnsiChar and then to UTF8String. It is important to note that AnsiStrings page code is based on the system code page (windows settings) so beware of that if your CLI output is using non-english characters. Also, pipe buffer size has it's own limits, default buffer size set in function is 4096 bytes, but you can change it to your needs (maximum safe limit is considered to be 64 kB).
 
 ## Errors
 
@@ -32,11 +34,37 @@ Supported input formats are available [here](https://help.syncfusion.com/documen
 
 ## Example
 
-All you need is compiled .NET CLI and Delphi wrapper in your uses clause.
+All you need is compiled .NET CLI, **Delphi/*** content in your Delphi project, and RtfToPdf in your uses clause.
 
 Notes: on CLI publish .pdb file can be removed.
 
 ```delphi
+uses RtfToPdf;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  try
+    RtfToPdf.ExecRtfToPdf(Edit1.Text, Edit2.Text);
+    ShowMessage('Conversion completed successfully');
+  except
+    on E: EFileNotFound do
+      ShowMessage('Error: ' + E.Message);
+    on E: EConversionErr do
+      ShowMessage('Error: ' + E.Message);
+
+    on E: EInvalidJsonResponse do
+      ShowMessage('Error: ' + E.Message);
+    on E: EUnknownStatus do
+      ShowMessage('Error: ' + E.Message);
+    on E: EInvalidArgLength do
+      ShowMessage('Error: ' + E.Message);
+    on E: EUnknownErrType do
+      ShowMessage('Error: ' + E.Message);
+
+    on E: Exception do
+      ShowMessage('Error: ' + E.Message);
+  end;
+end;
 ```
 
 ## SyncFusion license
