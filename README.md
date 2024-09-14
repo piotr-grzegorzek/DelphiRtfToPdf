@@ -10,9 +10,9 @@ Delphi/* contains source code for delphi wrapper parsing the CLI output, along w
 
 - **InvalidArgLength** - Error while parsing arguments
 
-- **FileNotFoundErr** - Input file not found
+- **FileNotFound** - Input file not found
 
-- **UnexpectedErr** - Error while converting file
+- **ConversionError** - Error while converting file
 
 ## Supported formats
 
