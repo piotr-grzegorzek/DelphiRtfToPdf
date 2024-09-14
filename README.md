@@ -6,13 +6,23 @@ CLI/* contains source code for .NET 5 (default target to make it [work on win7](
 
 Delphi/* contains source code for delphi wrapper parsing the CLI output, along with error handling, so you can easily integrate it into your delphi application, by checking error types below.
 
+Delphi/IPC.pas contains ExecAndCapture function, which is used to execute CLI and capture its output via anonymous pipe. It is slightly modified version of [this code](https://github.com/ThomasJaeger/VisualMASM/blob/b809d4efa0202523333f29fb3a84122fea410b22/Domain/uSharedGlobals.pas#L232) in order to support utf8 strings by casting cli output to PAnsiChar and then to UTF8String. It is important to note that AnsiStrings page code is based on the system code page (windows settings) so beware of that if your CLI output is using non-english characters. Also, pipe buffer size has it's own limits, default buffer size set in function is 4096 bytes, but you can change it to your needs (maximum safe limit is considered to be 64 kB).
+
 ## Errors
 
-- **InvalidArgLength** - Error while parsing arguments
+- **EFileNotFound** - Input file not found
 
-- **FileNotFound** - Input file not found
+- **EConversionErr** - Error while converting file
 
-- **ConversionError** - Error while converting file
+<br>
+
+- **EInvalidJsonResponse** - Error while parsing JSON response
+
+- **EUnknownStatus** - Unknown status returned in JSON response
+
+- **EInvalidArgLength** - Error while parsing arguments
+
+- **EUnknownErrType** - Unknown error type returned in JSON response
 
 ## Supported formats
 

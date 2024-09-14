@@ -34,7 +34,7 @@ namespace CLI
             }
             catch (Exception ex)
             {
-                WriteError("ConversionError", ex.Message);
+                WriteError("ConversionErr", ex.Message);
             }
         }
 
