@@ -16,11 +16,15 @@ Delphi/* contains source code for delphi wrapper parsing the CLI output, along w
 
 ## Supported formats
 
+SyncFusion supports a wide range of input formats (including RTF, DOCX, DOC, TXT, HTML, etc.).
+
 Supported input formats are available [here](https://help.syncfusion.com/document-processing/word/conversions/word-to-pdf/net/word-to-pdf?cs-save-lang=1&cs-lang=csharp#supported-file-formats).
 
 ## Example
 
 All you need is compiled .NET CLI and Delphi wrapper in your uses clause.
+
+Notes: on CLI publish .pdb file can be removed.
 
 ```delphi
 ```
