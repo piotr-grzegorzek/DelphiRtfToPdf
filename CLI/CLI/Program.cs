@@ -64,12 +64,12 @@ namespace CLI
             }
         }
 
-        static void WriteError(string code, string message)
+        static void WriteError(string type, string message)
         {
             var error = new
             {
                 status = "error",
-                code,
+                type,
                 message
             };
 
